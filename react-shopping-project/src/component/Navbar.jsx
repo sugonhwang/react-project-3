@@ -20,8 +20,11 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="search-bar">
-          <FontAwesomeIcon icon={faSearch} />
-          <input className="search-area" type="text" placeholder="제품 검색" />
+          <FontAwesomeIcon icon={faSearch} className="search-icon" />
+          <div className="input-box">
+            <input className="search-area" type="text" placeholder="Search" />
+            <span className="under-line"></span>
+          </div>
         </div>
       </div>
       <div></div>

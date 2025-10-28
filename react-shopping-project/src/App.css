@@ -61,9 +61,37 @@
 .search-area {
   display: flex;
   border: none;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  box-sizing: border-box;
+  position: relative;
+  /* height: 46px; */
+
+  &:focus {
+    outline: none;
+  }
 }
 
-.search-area:focus {
-  outline: none;
+input::-webkit-input-placeholder {
+  color: #aaa;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: dodgerblue;
+}
+
+.search-area:focus + .under-line {
+  transform: scale(1);
+}
+
+.under-line {
+  background-color: black;
+  display: inline-block;
+  height: 2px;
+  position: absolute;
+  -webkit-transform: scale(0, 1);
+  transform: scale(0, 1);
+  /* transform-origin: left; */
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  width: 150px;
 }
