@@ -4,6 +4,10 @@ import ProductAll from "./pages/ProductAll";
 import Login from "./pages/Login";
 import ProductDetail from "./pages/ProductDetail";
 import Navbar from "./component/Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import PrivateRoute from "./route/PrivateRoute";
 
 // 1. 전체 상품 페이지, 로그인, 상품 페이지
 // 1-1 Navigation Bar 만들기
@@ -17,13 +21,17 @@ import Navbar from "./component/Navbar";
 // 9. 상품을 검색할 수 있음
 
 function App() {
+  const [auth, setAuth] = useState(false);
+  useEffect(() => {
+    console.log("aaa", auth);
+  }, []);
   return (
     <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<ProductAll />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/login" element={<Login setAuth={setAuth} />} />
+        <Route path="/product/:id" element={<PrivateRoute auth={auth} />} />
       </Routes>
     </div>
   );
