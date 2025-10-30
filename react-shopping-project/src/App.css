@@ -6,9 +6,18 @@
   cursor: pointer;
 }
 
+.logout-button {
+  display: flex;
+  justify-content: end;
+  margin: 20px;
+  gap: 8px;
+  cursor: pointer;
+}
+
 .nav-section {
   display: flex;
   justify-content: center;
+  padding: 20px 0;
 }
 
 .menu-area {
@@ -127,11 +136,13 @@ input:focus::-webkit-input-placeholder {
   transform: scale(1);
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
-.product-card img:hover {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+.product-card:hover {
+  -webkit-transform: scale(1.02);
+  transform: scale(1.02);
 }
 
 .product-card img {
@@ -139,6 +150,7 @@ input:focus::-webkit-input-placeholder {
   height: auto;
   display: block;
   margin-top: 10px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .product-info {
@@ -146,8 +158,24 @@ input:focus::-webkit-input-placeholder {
   margin-bottom: 10px;
 }
 
+.product-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-img img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* 태블릿 사이즈 */
 @media (max-width: 992px) {
+  .menu-list {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
   .menu-list li {
     padding: 8px 12px;
     font-size: 14px;
@@ -160,38 +188,58 @@ input:focus::-webkit-input-placeholder {
 
   .search-area {
     font-size: 14px;
+    width: 120px;
+  }
+
+  .nav-section img {
+    width: 80px;
   }
 }
 
 /* 모바일 사이즈 - 햄버거 메뉴 활성화 */
 @media (max-width: 768px) {
+  .login-button,
+  .logout-button {
+    margin: 15px;
+    font-size: 14px;
+  }
+
+  .nav-section {
+    padding: 15px 0;
+  }
+
+  .nav-section img {
+    width: 70px;
+  }
+
   .menu-area {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    padding-bottom: 20px;
+    padding: 15px 20px;
+    padding-bottom: 30px;
   }
 
-  /* 햄버거 버튼 표시 */
-  .hamburger-btn {
-    display: block;
-    position: static;
-    order: 1;
-    z-index: 1001;
-  }
-
+  /* 햄버거 토글 버튼 (항상 보이는 버튼) */
   .hamburger-toggle {
     display: block;
-    position: static;
+    position: relative;
     order: 1;
   }
 
-  .hamburger-close {
+  /* 메뉴 내부의 닫기 버튼 */
+  .menu-list .hamburger-btn {
     display: block;
     position: absolute;
     top: 20px;
     right: 20px;
+    font-size: 28px;
+    padding: 5px;
+  }
+
+  /* 메뉴가 닫혀있을 때 메뉴 내부 버튼 숨김 */
+  .menu-list:not(.menu-open) .hamburger-btn {
+    display: none;
   }
 
   /* 메뉴 리스트를 세로로 변경하고 숨김 */
@@ -212,7 +260,7 @@ input:focus::-webkit-input-placeholder {
     order: 3;
   }
 
-  /* 메뉴 열림 상태 - 중요! */
+  /* 메뉴 열림 상태 */
   .menu-list.menu-open {
     left: 0;
   }
@@ -233,24 +281,27 @@ input:focus::-webkit-input-placeholder {
     background-color: #f8f8f8;
   }
 
+  .menu-list li:hover::before {
+    width: 0;
+  }
+
   /* 검색바 위치 조정 */
   .search-bar {
     margin: 0;
+    margin-left: auto;
     width: auto;
-    flex: 1;
-    max-width: none;
-    justify-content: flex-end;
+    flex: 0;
     order: 2;
   }
 
   .input-box {
-    width: 200px;
-    max-width: 100%;
+    width: 180px;
   }
 
   .search-area {
     width: 100%;
     font-size: 14px;
+    padding: 8px 6px;
   }
 
   /* 오버레이 효과 */
@@ -264,11 +315,15 @@ input:focus::-webkit-input-placeholder {
     background: rgba(0, 0, 0, 0.5);
     z-index: -1;
   }
-}
 
-.product-img {
-  display: flex;
-  justify-content: flex-end;
+  .product-img {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .product-img img {
+    max-width: 100%;
+  }
 }
 
 /* 작은 모바일 */
@@ -277,7 +332,52 @@ input:focus::-webkit-input-placeholder {
     width: 250px;
   }
 
+  .menu-list.menu-open::after {
+    left: 250px;
+    width: calc(100vw - 250px);
+  }
+
   .input-box {
-    width: 150px;
+    width: 140px;
+  }
+
+  .search-area {
+    font-size: 13px;
+  }
+
+  .menu-area {
+    padding: 10px 15px;
+    padding-bottom: 25px;
+  }
+
+  .product-info {
+    font-size: 14px;
+  }
+}
+
+/* 아주 작은 모바일 */
+@media (max-width: 360px) {
+  .input-box {
+    width: 120px;
+  }
+
+  .search-area {
+    font-size: 12px;
+    padding: 6px 4px;
+  }
+
+  .login-button,
+  .logout-button {
+    margin: 10px;
+    font-size: 13px;
+  }
+
+  .menu-list {
+    width: 220px;
+  }
+
+  .menu-list.menu-open::after {
+    left: 220px;
+    width: calc(100vw - 220px);
   }
 }

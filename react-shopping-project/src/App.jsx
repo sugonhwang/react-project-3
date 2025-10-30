@@ -6,7 +6,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Navbar from "./component/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PrivateRoute from "./route/PrivateRoute";
 
 // 1. 전체 상품 페이지, 로그인, 상품 페이지
@@ -22,12 +22,10 @@ import PrivateRoute from "./route/PrivateRoute";
 
 function App() {
   const [auth, setAuth] = useState(false);
-  useEffect(() => {
-    console.log("aaa", auth);
-  }, []);
+
   return (
     <div>
-      <Navbar />
+      <Navbar auth={auth} setAuth={setAuth} />
       <Routes>
         <Route path="/" element={<ProductAll />} />
         <Route path="/login" element={<Login setAuth={setAuth} />} />
