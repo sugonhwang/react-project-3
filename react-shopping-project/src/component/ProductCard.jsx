@@ -12,7 +12,7 @@ const ProductCard = ({ item }) => {
       <div className="product-info">
         <div>{item?.choice === true ? "concious choice" : ""}</div>
         <div>{item?.title}</div>
-        <div>{item?.price}</div>
+        <div>₩{item?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
         <div>{item?.new === true ? "신제품" : ""}</div>
       </div>
     </div>
